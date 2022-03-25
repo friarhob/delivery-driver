@@ -15,10 +15,7 @@ public class CarDelivery : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("Collided");    
-    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
