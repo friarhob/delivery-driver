@@ -53,10 +53,6 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
 
-        // TODO refactor this to CarDriver 
-        car.gameObject.transform.position = new Vector3(0f, 0f, 0f);
-        car.gameObject.transform.rotation = Quaternion.identity;
-
         Instantiate(packagesPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }

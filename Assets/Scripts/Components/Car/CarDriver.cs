@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class CarDriver : MonoBehaviour
     [SerializeField] float bumpSpeedMultiplier = 1/1.5f;
     [SerializeField] float delayUntilDestroySpeedMultiplier = 0.2f;
 
+    void Start()
+    {
+        EventManager.onStartNewGame += ResetPosition;
+    }
 
     void Update()
     {
@@ -21,6 +26,16 @@ public class CarDriver : MonoBehaviour
             transform.Rotate(0, 0, -steerAmount*steerBaseSpeed);
             transform.Translate(0, moveAmount*moveBaseSpeed, 0);
         }
+    }
+
+    void OnDestroy() {
+        EventManager.onStartNewGame -= ResetPosition;
+    }
+
+    void ResetPosition()
+    {
+        transform.position = new Vector3(0f, 0f, 0f);
+        transform.rotation = Quaternion.identity;
     }
 
     void OnCollisionEnter2D(Collision2D other)
