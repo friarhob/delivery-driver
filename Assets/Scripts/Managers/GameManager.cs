@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public static int numberOfPackages { get; private set; }
     public static int numberOfLives { get; private set; }
+    // TODO control time
+
 
     public static bool gameRunning;
 
@@ -18,13 +21,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length;
-        numberOfLives = 5;
-        gameRunning = true;
-
         EventManager.onPackageDelivered += this.OnPackageDelivered;
         EventManager.onCarCrash += this.OnCarCrash;
         EventManager.onGameOver += this.OnGameOver;
+        EventManager.onStartNewGame += this.NewGame;
+
+        EventManager.startNewGame();
+    }
+
+    public void NewGame()
+    {
+        numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length;
+        numberOfLives = 5;
+        gameRunning = true;
     }
 
     void OnPackageDelivered()
@@ -50,6 +59,7 @@ public class GameManager : MonoBehaviour
         EventManager.onPackageDelivered -= this.OnPackageDelivered;
         EventManager.onCarCrash -= this.OnCarCrash;
         EventManager.onGameOver -= this.OnGameOver;
+        EventManager.onStartNewGame -= this.NewGame;
     }
 
 }

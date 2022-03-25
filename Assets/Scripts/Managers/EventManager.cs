@@ -16,6 +16,9 @@ public class EventManager : MonoBehaviour
     public delegate void GameOver();
     public static event GameOver onGameOver;
 
+    public delegate void NewGame();
+    public static event NewGame onStartNewGame;
+
     void Awake()
     {
         Instance = Instance ? Instance : this;
@@ -46,5 +49,10 @@ public class EventManager : MonoBehaviour
     public static void gameOver()
     {
         onGameOver?.Invoke();
+    }
+
+    public static void startNewGame()
+    {
+        onStartNewGame?.Invoke();
     }
 }
