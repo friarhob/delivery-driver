@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI timerText;
     
     [SerializeField] public GameObject gameOverPanel;
+    [SerializeField] public GameObject gameWonPanel;
     [SerializeField] public GameObject car;
 
     [SerializeField] public GameObject packagesPrefab;
@@ -20,7 +22,9 @@ public class UIManager : MonoBehaviour
     {
         EventManager.onGameOver += this.OnGameOver;
         EventManager.onStartNewGame += this.OnStartNewGame;
+        EventManager.onGameWon += this.OnGameWon;
     }
+
     void Update()
     {
         if(GameManager.gameRunning)
@@ -40,11 +44,13 @@ public class UIManager : MonoBehaviour
     {
         EventManager.onGameOver -= this.OnGameOver;
         EventManager.onStartNewGame -= this.OnStartNewGame;
+        EventManager.onGameWon -= this.OnGameWon;
     }
 
     void OnStartNewGame()
     {
         gameOverPanel.SetActive(false);
+        gameWonPanel.SetActive(false);
         car.gameObject.transform.position = new Vector3(0f, 0f, 0f);
         car.gameObject.transform.rotation = Quaternion.identity;
 
@@ -67,4 +73,11 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    void OnGameWon()
+    {
+        UpdateTextFields();
+        gameWonPanel.SetActive(true);
+    }
+
+
 }

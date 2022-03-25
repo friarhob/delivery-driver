@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         EventManager.onPackageDelivered += this.OnPackageDelivered;
         EventManager.onCarCrash += this.OnCarCrash;
         EventManager.onGameOver += this.OnGameOver;
+        EventManager.onGameWon += this.OnGameOver;
         EventManager.onStartNewGame += this.NewGame;
 
         EventManager.startNewGame();
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour
     void OnPackageDelivered()
     {
         numberOfPackages--;
+        if(gameRunning && numberOfPackages <= 0)
+        {
+            EventManager.gameWon();
+        }
     }
 
     void OnCarCrash()
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
         EventManager.onPackageDelivered -= this.OnPackageDelivered;
         EventManager.onCarCrash -= this.OnCarCrash;
         EventManager.onGameOver -= this.OnGameOver;
+        EventManager.onGameWon -= this.OnGameOver;
         EventManager.onStartNewGame -= this.NewGame;
     }
 

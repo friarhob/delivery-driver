@@ -19,6 +19,9 @@ public class EventManager : MonoBehaviour
     public delegate void NewGame();
     public static event NewGame onStartNewGame;
 
+    public delegate void WonGame();
+    public static event WonGame onGameWon;
+
     void Awake()
     {
         Instance = Instance ? Instance : this;
@@ -54,5 +57,10 @@ public class EventManager : MonoBehaviour
     public static void startNewGame()
     {
         onStartNewGame?.Invoke();
+    }
+
+    public static void gameWon()
+    {
+        onGameWon?.Invoke();
     }
 }
