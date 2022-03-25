@@ -13,6 +13,9 @@ public class EventManager : MonoBehaviour
     public delegate void PackageDelivered();
     public static event PackageDelivered onPackageDelivered;
 
+    public delegate void GameOver();
+    public static event GameOver onGameOver;
+
     void Awake()
     {
         Instance = Instance ? Instance : this;
@@ -38,5 +41,10 @@ public class EventManager : MonoBehaviour
     public static void packageDelivered()
     {
         onPackageDelivered?.Invoke();
+    }
+
+    public static void gameOver()
+    {
+        onGameOver?.Invoke();
     }
 }

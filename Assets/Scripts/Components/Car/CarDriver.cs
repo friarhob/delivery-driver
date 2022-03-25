@@ -13,11 +13,14 @@ public class CarDriver : MonoBehaviour
 
     void Update()
     {
-        float steerAmount = Input.GetAxis("Horizontal")*Time.deltaTime;
-        float moveAmount = Input.GetAxis("Vertical")*Time.deltaTime;
+        if(GameManager.gameRunning)
+        {
+            float steerAmount = Input.GetAxis("Horizontal")*Time.deltaTime;
+            float moveAmount = Input.GetAxis("Vertical")*Time.deltaTime;
 
-        transform.Rotate(0, 0, -steerAmount*steerBaseSpeed);
-        transform.Translate(0, moveAmount*moveBaseSpeed, 0);
+            transform.Rotate(0, 0, -steerAmount*steerBaseSpeed);
+            transform.Translate(0, moveAmount*moveBaseSpeed, 0);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
