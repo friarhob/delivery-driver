@@ -37,7 +37,6 @@ public class EventManager : MonoBehaviour
 
     public static void packageDelivered()
     {
-        Debug.Log("Package delivered event");
         onPackageDelivered?.Invoke();
     }
 }
