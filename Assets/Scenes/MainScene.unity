@@ -14191,7 +14191,6 @@ MonoBehaviour:
   timerText: {fileID: 1442098392}
   gameOverPanel: {fileID: 173894033}
   gameWonPanel: {fileID: 1274575964}
-  car: {fileID: 1747379042}
   packagesPrefab: {fileID: 5450299459798878460, guid: a7c5d006ba61f524a9413d2a95ea9683, type: 3}
   powerupsPrefab: {fileID: 6912597793663990915, guid: 1a0e42faab9e09a4d8b0905883f0ebf9, type: 3}
 --- !u!1 &1099712866
@@ -19165,10 +19164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -19195,7 +19194,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!1 &1501176305
 GameObject:
