@@ -8,6 +8,7 @@ TagManager:
   - Customer
   - SpeedBoost
   - SpeedBump
+  - RuntimePrefab
   layers:
   - Default
   - TransparentFX
