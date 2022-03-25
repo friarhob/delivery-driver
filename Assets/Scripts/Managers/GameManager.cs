@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-     public static EventManager eventManager;
+    public static EventManager eventManager;
+    public static ScoreManager scoreManager;
 
     void Awake() {
         Instance = Instance ? Instance : this;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         eventManager = EventManager.Instance;
+        scoreManager = ScoreManager.Instance;
     }
 
 }
