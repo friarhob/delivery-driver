@@ -14,6 +14,17 @@ public class CarDelivery : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hasPackage = false;
+
+        EventManager.onStartNewGame += ResetColour;
+    }
+
+    void OnDestroy() {
+        EventManager.onStartNewGame -= ResetColour;
+    }
+
+    public void ResetColour()
+    {
+        spriteRenderer.color = noPackageColour;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -28,7 +39,7 @@ public class CarDelivery : MonoBehaviour
         if(other.tag == "Customer" && hasPackage)
         {
             hasPackage = false;
-            spriteRenderer.color = noPackageColour;
+            ResetColour();
 
             EventManager.packageDelivered();
         }

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject car;
 
     [SerializeField] public GameObject packagesPrefab;
+    [SerializeField] public GameObject powerupsPrefab;
 
     // TODO reset powerups
 
@@ -51,10 +52,22 @@ public class UIManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
+
+        // TODO refactor this to CarDriver 
         car.gameObject.transform.position = new Vector3(0f, 0f, 0f);
         car.gameObject.transform.rotation = Quaternion.identity;
 
         Instantiate(packagesPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    void RemovePrefabs()
+    {
+        GameObject[] elements = GameObject.FindGameObjectsWithTag("RuntimePrefab");
+        foreach(GameObject element in elements)
+        {
+            Destroy(element, 0.1f);
+        }
     }
 
     void OnGameOver()
@@ -62,16 +75,8 @@ public class UIManager : MonoBehaviour
         UpdateTextFields();
         gameOverPanel.SetActive(true);
 
-        // Destroy all packages current in game
-        GameObject[] packages = GameObject.FindGameObjectsWithTag("Package");
-        if(packages.Length > 0)
-        {
-            foreach(GameObject package in packages)
-            {
-                Debug.Log(package);
-                Destroy(package, 0.1f);
-            }
-        }
+        RemovePrefabs();
+
     }
     void OnGameWon()
     {
