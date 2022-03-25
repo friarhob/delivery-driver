@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] public GameObject packagesPrefab;
 
+    // TODO reset powerups
+
     void Start()
     {
         EventManager.onGameOver += this.OnGameOver;
