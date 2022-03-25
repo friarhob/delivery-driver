@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject gameWonPanel;
-    [SerializeField] public GameObject car;
 
     [SerializeField] public GameObject packagesPrefab;
     [SerializeField] public GameObject powerupsPrefab;
