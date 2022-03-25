@@ -22,7 +22,7 @@ public class CarDriver : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        GameManager.eventManager.carCrash();
+        EventManager.carCrash();
     }
 
     void OnTriggerEnter2D(Collider2D other)

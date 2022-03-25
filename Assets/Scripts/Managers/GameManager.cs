@@ -7,17 +7,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static EventManager eventManager;
-    public static ScoreManager scoreManager;
+    private int numberOfPackages;
 
     void Awake() {
         Instance = Instance ? Instance : this;
-    }    
+    }
 
     void Start()
     {
-        eventManager = EventManager.Instance;
-        scoreManager = ScoreManager.Instance;
+        numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length;
+
+        EventManager.onPackageDelivered += this.OnPackageDelivered;
+    }
+
+    void OnPackageDelivered()
+    {
+        numberOfPackages--;
+
+        Debug.Log("Current packages: "+numberOfPackages);
     }
 
 }

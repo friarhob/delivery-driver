@@ -7,12 +7,13 @@ public class CarDelivery : MonoBehaviour
     [SerializeField] Color32 hasPackageColour = new Color32(1,1,1,1);
     [SerializeField] Color32 noPackageColour = new Color32(1,1,1,1);
     [SerializeField] float delayUntilDestroyPackage = 1.0f;
-    bool hasPackage = false;
+    public bool hasPackage {get; private set;}
     SpriteRenderer spriteRenderer;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hasPackage = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -28,6 +29,8 @@ public class CarDelivery : MonoBehaviour
         {
             hasPackage = false;
             spriteRenderer.color = noPackageColour;
+
+            EventManager.packageDelivered();
         }
     }
 }
