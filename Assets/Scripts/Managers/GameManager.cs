@@ -10,10 +10,9 @@ public class GameManager : MonoBehaviour
 
     public static int numberOfPackages { get; private set; }
     public static int numberOfLives { get; private set; }
-    // TODO control time
+    public static float remainingTime { get; private set; }
 
-
-    public static bool gameRunning;
+    public static bool gameRunning { get; private set; }
 
     void Awake() {
         Instance = Instance ? Instance : this;
@@ -29,11 +28,24 @@ public class GameManager : MonoBehaviour
         EventManager.startNewGame();
     }
 
+    void Update()
+    {
+        if(gameRunning)
+        {
+            remainingTime -= Time.deltaTime;
+            if(remainingTime <= 0)
+            {
+                EventManager.gameOver();
+            }
+        }
+    }
+
     public void NewGame()
     {
         numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length;
         numberOfLives = 5;
         gameRunning = true;
+        remainingTime = 60f;
     }
 
     void OnPackageDelivered()

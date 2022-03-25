@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI livesText;
     [SerializeField] public TextMeshProUGUI packagesText;
+    [SerializeField] public TextMeshProUGUI timerText;
+    
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject car;
 
@@ -26,7 +28,8 @@ public class UIManager : MonoBehaviour
     void UpdateTextFields()
     {
         livesText.text = "Lives: "+GameManager.numberOfLives;
-        packagesText.text = "Packages: "+GameManager.numberOfPackages;  
+        packagesText.text = "Packages: "+GameManager.numberOfPackages;
+        timerText.text = ""+Mathf.CeilToInt(GameManager.remainingTime);
     }
 
     void OnDestroy()
