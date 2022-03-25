@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject car;
 
+    [SerializeField] public GameObject packagesPrefab;
+
     void Start()
     {
         EventManager.onGameOver += this.OnGameOver;
@@ -42,14 +44,25 @@ public class UIManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         car.gameObject.transform.position = new Vector3(0f, 0f, 0f);
-        car.gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        car.gameObject.transform.rotation = Quaternion.identity;
 
-        // TODO Regenerate packages
+        Instantiate(packagesPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     void OnGameOver()
     {
         UpdateTextFields();
         gameOverPanel.SetActive(true);
+
+        // Destroy all packages current in game
+        GameObject[] packages = GameObject.FindGameObjectsWithTag("Package");
+        if(packages.Length > 0)
+        {
+            foreach(GameObject package in packages)
+            {
+                Debug.Log(package);
+                Destroy(package, 0.1f);
+            }
+        }
     }
 }
