@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
 
     public delegate void CarCrash();
     public static event CarCrash onCarCrash;
+    private static System.DateTime lastCarCrash;
 
     public delegate void PackageDelivered();
     public static event PackageDelivered onPackageDelivered;
@@ -17,10 +18,21 @@ public class EventManager : MonoBehaviour
         Instance = Instance ? Instance : this;
     }
 
+    void Start()
+    {
+        lastCarCrash = System.DateTime.Now;    
+    }
+
     public static void carCrash()
     {
-        Debug.Log("Invoking car crash event");
-        onCarCrash?.Invoke();
+        // Make sure multiple crashes don't occur too close to each other
+        System.DateTime now = System.DateTime.Now;
+        System.TimeSpan timeSpan = now - lastCarCrash;
+        
+        lastCarCrash = System.DateTime.Now;
+
+        if(timeSpan.TotalSeconds > 0.5)
+            onCarCrash?.Invoke();
     }
 
     public static void packageDelivered()
