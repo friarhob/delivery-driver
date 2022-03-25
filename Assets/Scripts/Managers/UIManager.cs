@@ -9,8 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI packagesText;
     void Update()
     {
-        livesText.text = "Lives: "+GameManager.numberOfLives;
-        packagesText.text = "Packages: "+GameManager.numberOfPackages;
-        
+        if(GameManager.gameRunning)
+        {
+            livesText.text = "Lives: "+GameManager.numberOfLives;
+            packagesText.text = "Packages: "+GameManager.numberOfPackages;  
+        }
     }
 }
