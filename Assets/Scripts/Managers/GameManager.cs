@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
         EventManager.onGameOver += this.OnGameOver;
         EventManager.onGameWon += this.OnGameOver;
         EventManager.onStartNewGame += this.NewGame;
-
-        EventManager.startNewGame();
     }
 
     void Update()

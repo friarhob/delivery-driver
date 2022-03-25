@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject gameWonPanel;
+    [SerializeField] public GameObject instructionsPanel;
 
     [SerializeField] public GameObject packagesPrefab;
     [SerializeField] public GameObject powerupsPrefab;
@@ -47,8 +48,7 @@ public class UIManager : MonoBehaviour
 
     void OnStartNewGame()
     {
-        gameOverPanel.SetActive(false);
-        gameWonPanel.SetActive(false);
+        closeAllPanels();
 
         Instantiate(packagesPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -75,6 +75,20 @@ public class UIManager : MonoBehaviour
     {
         UpdateTextFields();
         gameWonPanel.SetActive(true);
+    }
+
+    void closeAllPanels()
+    {
+        gameOverPanel.SetActive(false);
+        gameWonPanel.SetActive(false);
+        instructionsPanel.SetActive(false);
+    }
+
+    public void openInstructions()
+    {
+        closeAllPanels();
+
+        instructionsPanel.SetActive(true);
     }
 
 
