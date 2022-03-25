@@ -15,14 +15,10 @@ public class CarDelivery : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Package" && !hasPackage)
         {
-            Debug.Log("Package picked up!");
-
             hasPackage = true;
             spriteRenderer.color = hasPackageColour;
 
@@ -30,8 +26,6 @@ public class CarDelivery : MonoBehaviour
         }
         if(other.tag == "Customer" && hasPackage)
         {
-            Debug.Log("Package delivered!");
-
             hasPackage = false;
             spriteRenderer.color = noPackageColour;
         }

@@ -20,6 +20,11 @@ public class CarDriver : MonoBehaviour
         transform.Translate(0, moveAmount*moveBaseSpeed, 0);
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        GameManager.eventManager.carCrash();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "SpeedBoost")
