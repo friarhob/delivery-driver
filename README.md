@@ -59,6 +59,7 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 
 ## To-do List
 
-* Random generation of levels
+* Random generation of powerup positions
 * More powerups (extra time, add a new package, remove a random package)
+* Difficulty levels (more/less initial packages)
 * A scoring system?
