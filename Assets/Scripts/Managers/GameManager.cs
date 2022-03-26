@@ -77,5 +77,4 @@ public class GameManager : MonoBehaviour
         EventManager.onGameWon -= this.OnGameOver;
         EventManager.onStartNewGame -= this.NewGame;
     }
-
 }
