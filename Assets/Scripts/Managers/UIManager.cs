@@ -14,8 +14,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject gameWonPanel;
     [SerializeField] public GameObject instructionsPanel;
 
-    [SerializeField] public GameObject packagesPrefab;
     [SerializeField] public GameObject powerupsPrefab;
+
+    [SerializeField] public GameObject[] packagesPrefabs;
 
     void Start()
     {
@@ -48,19 +49,43 @@ public class UIManager : MonoBehaviour
 
     void OnStartNewGame()
     {
-        closeAllPanels();
+        CloseAllPanels();
 
-        Instantiate(packagesPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        RegeneratePackages();
         Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    private void RegeneratePackages()
+    {
+        DestroyAllObjectsPerTag("Package");
+
+        List<int> indexList = new List<int>();
+
+        for(int i = 0; i < packagesPrefabs.Length; i++)
+        {
+            indexList.Add(i);
+        }
+
+        for(int i = 0; i < 3; i++)
+        {
+            int index = UnityEngine.Random.Range(0, indexList.Count - 1);
+            GameObject element = packagesPrefabs[indexList[index]];
+            Instantiate(element);
+        }
+    }
+
+    private void DestroyAllObjectsPerTag(string tag, float delay = 0.01f)
+    {
+        GameObject[] elements = GameObject.FindGameObjectsWithTag(tag);
+        foreach(GameObject element in elements)
+        {
+            Destroy(element, delay);
+        }
     }
 
     void RemovePrefabs()
     {
-        GameObject[] elements = GameObject.FindGameObjectsWithTag("RuntimePrefab");
-        foreach(GameObject element in elements)
-        {
-            Destroy(element, 0.1f);
-        }
+        DestroyAllObjectsPerTag("RuntimePrefab", 0.1f);
     }
 
     void OnGameOver()
@@ -77,7 +102,7 @@ public class UIManager : MonoBehaviour
         gameWonPanel.SetActive(true);
     }
 
-    void closeAllPanels()
+    void CloseAllPanels()
     {
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
@@ -86,7 +111,7 @@ public class UIManager : MonoBehaviour
 
     public void openInstructions()
     {
-        closeAllPanels();
+        CloseAllPanels();
 
         instructionsPanel.SetActive(true);
     }

@@ -4,6 +4,8 @@ You can play it [here](https://friarhob.github.io/delivery-driver).
 
 Simple prototype developed (and changed to include rules, a game mechanic and refactoring) based on [GameDev.tv Unity Course on Udemy](https://www.udemy.com/course/unitycourse/).
 
+---
+
 ## Rules
 
 * WASD/Arrows to move (also supports joysticks, but I didn't test this throughouly).
@@ -15,6 +17,8 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 * Powerups can:
   - Increase your speed.
   - Decrease your speed.
+
+---
 
 ## Basic Architecture Decisions
 
@@ -30,12 +34,12 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 |Event Name|Function to invoke it|Notes|
 |--|--|--|
 |onCarCrash|carCrash()|Event just called if there wasn't a previous crash less than 0.5 seconds before|
-|onGameOver|gameOver()|Game over in case of defeat|
+|onGameOver|gameOver()|Game over should just run in case of defeat|
 |onGameWon|gameWon()||
 |onPackageDelivered|packageDelivered()||
 |onStartNewGame|startNewGame()||
 
-* **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups).
+* **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups). Packages are generated randomly.
 
 ### Canvas
 
@@ -50,6 +54,8 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 * **GameOverPanel** shows a game over message, when a player loses (either by using all their lives or time running out), with buttons for starting a new game and opening the instructions panel.
 * **GameOverPanel** shows a game over message, when a player loses (delivering all packages), with buttons for starting a new game and opening the instructions panel.
 * **InstructionsPanel** opens when the game start, showing the rules, with a button for starting a new game.
+
+---
 
 ## To-do List
 
