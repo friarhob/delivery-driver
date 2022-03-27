@@ -38,9 +38,9 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 |--|--|--|
 |onCarCrash|carCrash()|Event just called if there wasn't a previous crash less than 0.5 seconds before|
 |onGameOver|gameOver()|Game over should just run in case of defeat|
-|onGameWon|gameWon()||
+|onGameWon|gameWon()|-|
 |onPackageDelivered|packageDelivered()|Package removed by powerup also triggers this option|
-|onStartNewGame|startNewGame()||
+|onStartNewGame|startNewGame()|Event called even in the first run|
 
 * **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups). Packages and powerups are generated randomly. Powerups include:
 
