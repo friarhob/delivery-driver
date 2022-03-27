@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject powerupsPrefab;
 
     [SerializeField] public GameObject[] packagesPrefabs;
+    [SerializeField] public GameObject[] powerupsPrefabs;
+
+    private int initialPackagesQuantity = 3;
 
     void Start()
     {
@@ -57,8 +60,6 @@ public class UIManager : MonoBehaviour
 
     private void RegeneratePackages()
     {
-        DestroyAllObjectsPerTag("Package");
-
         List<int> indexList = new List<int>();
 
         for(int i = 0; i < packagesPrefabs.Length; i++)
@@ -66,7 +67,7 @@ public class UIManager : MonoBehaviour
             indexList.Add(i);
         }
 
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < initialPackagesQuantity; i++)
         {
             int index = UnityEngine.Random.Range(0, indexList.Count - 1);
             GameObject element = packagesPrefabs[indexList[index]];
@@ -85,6 +86,7 @@ public class UIManager : MonoBehaviour
 
     void RemovePrefabs()
     {
+        DestroyAllObjectsPerTag("Package");
         DestroyAllObjectsPerTag("RuntimePrefab", 0.1f);
     }
 
@@ -94,7 +96,6 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(true);
 
         RemovePrefabs();
-
     }
     void OnGameWon()
     {

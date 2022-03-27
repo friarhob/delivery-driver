@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
         EventManager.onStartNewGame += this.NewGame;
     }
 
+    void OnDestroy() {
+        EventManager.onPackageDelivered -= this.OnPackageDelivered;
+        EventManager.onCarCrash -= this.OnCarCrash;
+        EventManager.onGameOver -= this.OnGameOver;
+        EventManager.onGameWon -= this.OnGameOver;
+        EventManager.onStartNewGame -= this.NewGame;
+    }
+
     void Update()
     {
         if(gameRunning)
@@ -45,6 +53,14 @@ public class GameManager : MonoBehaviour
         numberOfLives = 5;
         gameRunning = true;
         remainingTime = 60f;
+    }
+
+    public void AddTime(float amount)
+    {
+        if(gameRunning)
+        {
+            remainingTime += amount;
+        }
     }
 
     void OnPackageDelivered()
@@ -70,11 +86,5 @@ public class GameManager : MonoBehaviour
         gameRunning = false;
     }
 
-    void OnDestroy() {
-        EventManager.onPackageDelivered -= this.OnPackageDelivered;
-        EventManager.onCarCrash -= this.OnCarCrash;
-        EventManager.onGameOver -= this.OnGameOver;
-        EventManager.onGameWon -= this.OnGameOver;
-        EventManager.onStartNewGame -= this.NewGame;
-    }
+
 }

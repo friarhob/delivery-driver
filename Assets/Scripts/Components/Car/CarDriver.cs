@@ -7,13 +7,15 @@ public class CarDriver : MonoBehaviour
 {
     [SerializeField] float steerBaseSpeed = 200f;
     [SerializeField] float moveBaseSpeed = 10f;
-    [SerializeField] float boostSpeedMultiplier = 1.5f;
-    [SerializeField] float bumpSpeedMultiplier = 1/1.5f;
-    [SerializeField] float delayUntilDestroySpeedMultiplier = 0.2f;
+
+    private float steerSpeed;
+    private float moveSpeed;
 
     void Start()
     {
-        EventManager.onStartNewGame += ResetPosition;
+        ResetCarInfo();
+
+        EventManager.onStartNewGame += ResetCarInfo;
     }
 
     void Update()
@@ -23,19 +25,22 @@ public class CarDriver : MonoBehaviour
             float steerAmount = Input.GetAxis("Horizontal")*Time.deltaTime;
             float moveAmount = Input.GetAxis("Vertical")*Time.deltaTime;
 
-            transform.Rotate(0, 0, -steerAmount*steerBaseSpeed);
-            transform.Translate(0, moveAmount*moveBaseSpeed, 0);
+            transform.Rotate(0, 0, -steerAmount*steerSpeed);
+            transform.Translate(0, moveAmount*moveSpeed, 0);
         }
     }
 
     void OnDestroy() {
-        EventManager.onStartNewGame -= ResetPosition;
+        EventManager.onStartNewGame -= ResetCarInfo;
     }
 
-    void ResetPosition()
+    void ResetCarInfo()
     {
         transform.position = new Vector3(0f, 0f, 0f);
         transform.rotation = Quaternion.identity;
+
+        steerSpeed = steerBaseSpeed;
+        moveSpeed = moveBaseSpeed;
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -43,20 +48,8 @@ public class CarDriver : MonoBehaviour
         EventManager.carCrash();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void MultiplySpeed(float factor)
     {
-        if(other.tag == "SpeedBoost")
-        {
-            moveBaseSpeed *= boostSpeedMultiplier;
-
-            Destroy(other.gameObject, delayUntilDestroySpeedMultiplier);
-        }
-
-        if(other.tag == "SpeedBump")
-        {
-            moveBaseSpeed *= bumpSpeedMultiplier;
-
-            Destroy(other.gameObject, delayUntilDestroySpeedMultiplier);
-        }
+        moveSpeed *= factor;
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - SpeedBoost
   - SpeedBump
   - RuntimePrefab
+  - Car
+  - PowerUp
   layers:
   - Default
   - TransparentFX

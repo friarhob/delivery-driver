@@ -565,7 +565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17977784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.88, y: 2.55, z: 0}
+  m_LocalPosition: {x: 1.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 253700490}
@@ -14550,8 +14550,44 @@ MonoBehaviour:
   gameOverPanel: {fileID: 173894033}
   gameWonPanel: {fileID: 1274575964}
   instructionsPanel: {fileID: 143597108}
-  packagesPrefab: {fileID: 5450299459798878460, guid: a7c5d006ba61f524a9413d2a95ea9683, type: 3}
   powerupsPrefab: {fileID: 6912597793663990915, guid: 1a0e42faab9e09a4d8b0905883f0ebf9, type: 3}
+  packagesPrefabs:
+  - {fileID: 3458217196420957932, guid: 4ff405b617faba34d89ddfcdfccb9aab, type: 3}
+  - {fileID: 814850251104383105, guid: 4f4897c48fe8cc74db01cacd19ccaa20, type: 3}
+  - {fileID: 2989764176610182672, guid: 8b092b647bedfbe498bb959d10ea1a74, type: 3}
+  - {fileID: 7657708018414418743, guid: 32d14b0c9f8b095498b3eb1a1565c7a7, type: 3}
+  - {fileID: 6505645351893549882, guid: 0138f92d5dfba6f4e841219f89e170f5, type: 3}
+  - {fileID: 2003961401645039317, guid: 523dd6e7bb931864897d9de92d37f3b3, type: 3}
+  - {fileID: 2707801379853662168, guid: 37b2b6a6f422eb645b1ecda2f2412136, type: 3}
+  - {fileID: 9028012044652819125, guid: daf7da937e0ba034191b40cacc4ebde6, type: 3}
+  - {fileID: 1438814796879978150, guid: 0043febf4f2c35648bd9f601677fd761, type: 3}
+  - {fileID: 281926380777656409, guid: b085632bc1cb3424d8ebb094cfd5185f, type: 3}
+  - {fileID: 5867511809699400130, guid: 4bf4434c86612ff479f2620ea7f12000, type: 3}
+  - {fileID: 8702037934832059846, guid: d4c704d26650f4043a2f57efac094247, type: 3}
+  - {fileID: 7614925660743048106, guid: 6fa2ac934a2c7d145a5dfc5670f06a61, type: 3}
+  - {fileID: 6489452752109274495, guid: 4f826a9aa72148642b258772e3179b45, type: 3}
+  - {fileID: 838698304031572049, guid: 31ac9e95de176c949a7982583e9d4075, type: 3}
+  - {fileID: 908080145432757362, guid: 05b1b5d2642c5ee4991fbf44f317200c, type: 3}
+  - {fileID: 6410543948925494695, guid: 611c682dc68a5044aa50be9557b40c22, type: 3}
+  - {fileID: 6741640470363628769, guid: a3cb02299fbf3f0408a07c75e12d6b06, type: 3}
+  - {fileID: 4924244566970107527, guid: 700b858f4410b2c4ab2f5261b9c9ba99, type: 3}
+  - {fileID: 4924244566970107527, guid: 700b858f4410b2c4ab2f5261b9c9ba99, type: 3}
+  - {fileID: 737432321017374970, guid: 92774cdd6519af343b8d7ffa218c5824, type: 3}
+  - {fileID: 59279780114068351, guid: 0f0e733d382e48b4aabb58bb5b7adf01, type: 3}
+  - {fileID: 6285539521368152212, guid: 51d24ebfd1a453e48af444040925c914, type: 3}
+  - {fileID: 713223955636009263, guid: 192109971c9fdb44da5e63cbf23624a1, type: 3}
+  - {fileID: 2914494599759748612, guid: 5ac2285afdca2b74cb35d8c5d94ca549, type: 3}
+  - {fileID: 4453524467984342322, guid: 24e7f26b4388f424280891b7d0193543, type: 3}
+  - {fileID: 5255279238643444140, guid: 1f49e73fb31949e4ca8348c0c139d871, type: 3}
+  - {fileID: 5146744802935532998, guid: 06a4b1ec5263bd4489fa622ee4b664d1, type: 3}
+  - {fileID: 1642937750634544115, guid: 5589e18b11e34704c87d2908d81b12d7, type: 3}
+  - {fileID: 2537130006363130906, guid: f1b0d73f3a9f2ae4da9648b3d4b40145, type: 3}
+  - {fileID: 430442575823376747, guid: 37454881d8e96fc439ee5a05cbce061a, type: 3}
+  - {fileID: 8210516908702127670, guid: 5056e00b0ca82614d91e34195b3d473d, type: 3}
+  - {fileID: 137047077776535238, guid: a89124ea725aaff488b2e5ec37ebeb66, type: 3}
+  - {fileID: 3830600641234289390, guid: 35fb82dbf476a3a4db77e6f1b4024936, type: 3}
+  - {fileID: 843095115565367540, guid: 3068bd9473d291b4cb03cd1c2e326a03, type: 3}
+  powerupsPrefabs: []
 --- !u!1 &1099712866
 GameObject:
   m_ObjectHideFlags: 0
@@ -23184,7 +23220,7 @@ GameObject:
   - component: {fileID: 1747379046}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23217,9 +23253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steerBaseSpeed: 200
   moveBaseSpeed: 10
-  boostSpeedMultiplier: 1.5
-  bumpSpeedMultiplier: 0.6666667
-  delayUntilDestroySpeedMultiplier: 0.2
 --- !u!212 &1747379045
 SpriteRenderer:
   m_ObjectHideFlags: 0
