@@ -2,7 +2,7 @@
 
 You can play it [here](https://friarhob.github.io/delivery-driver).
 
-Simple prototype developed (and changed to include rules, a game mechanic and refactoring) based on [GameDev.tv Unity Course on Udemy](https://www.udemy.com/course/unitycourse/).
+Simple prototype developed (and changed to include rules, a game mechanic and refactoring) based on [GameDev.tv Unity2D Course on Udemy](https://www.udemy.com/course/unitycourse/).
 
 ---
 
