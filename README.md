@@ -69,4 +69,5 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 ## To-do List
 
 * Difficulty levels (more/less initial packages)
+* Compose music + add sounds
 * A scoring system?
