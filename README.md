@@ -49,7 +49,6 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 |Red|Remove a random package from the game|
 |Yellow|Increases the car speed|
 
-
 ### Canvas
 
 #### Text fields
