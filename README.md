@@ -39,7 +39,16 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 |onPackageDelivered|packageDelivered()||
 |onStartNewGame|startNewGame()||
 
-* **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups). Packages are generated randomly.
+* **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups). Packages and powerups are generated randomly. Powerups include:
+
+|PowerUp Colour|Description
+|--|--|
+|Blue|Reduces the car speed|
+|Green|Adds 10 more seconds to the game|
+|Purple|Adds a new random package to the game|
+|Red|Remove a random package from the game|
+|Yellow|Increases the car speed|
+
 
 ### Canvas
 
@@ -59,7 +68,5 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 
 ## To-do List
 
-* Random generation of powerup positions
-* More powerups (extra time, add a new package, remove a random package)
 * Difficulty levels (more/less initial packages)
 * A scoring system?
