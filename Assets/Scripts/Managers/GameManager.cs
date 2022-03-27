@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        EventManager.onPackageDelivered += this.OnPackageDelivered;
+//        EventManager.onPackageDelivered += this.OnPackageDelivered;
         EventManager.onCarCrash += this.OnCarCrash;
         EventManager.onGameOver += this.OnGameOver;
         EventManager.onGameWon += this.OnGameOver;
@@ -34,21 +34,15 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.RemoveRandomPackages(-packagesAdded);
         }
-        else
+        else if(packagesAdded > 0)
         {
             UIManager.Instance.AddRandomPackages(packagesAdded);
-        }
-
-        numberOfPackages += packagesAdded;
-        if(numberOfPackages <= 0)
-        {
-            numberOfPackages = 0;
-            EventManager.gameWon();
+            EventManager.packageDelivered();
         }
     }
 
+
     void OnDestroy() {
-        EventManager.onPackageDelivered -= this.OnPackageDelivered;
         EventManager.onCarCrash -= this.OnCarCrash;
         EventManager.onGameOver -= this.OnGameOver;
         EventManager.onGameWon -= this.OnGameOver;
@@ -64,12 +58,19 @@ public class GameManager : MonoBehaviour
             {
                 EventManager.gameOver();
             }
+
+            bool carCarrying = GameObject.FindGameObjectWithTag("Car").GetComponent<CarDelivery>().hasPackage;
+            numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length + (carCarrying ? 1 : 0);
+            if(numberOfPackages == 0)
+            {
+                EventManager.gameWon();
+            }
+            
         }
     }
 
     public void NewGame()
     {
-        numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length;
         numberOfLives = 5;
         gameRunning = true;
         remainingTime = 60f;
@@ -80,15 +81,6 @@ public class GameManager : MonoBehaviour
         if(gameRunning)
         {
             remainingTime += amount;
-        }
-    }
-
-    void OnPackageDelivered()
-    {
-        numberOfPackages--;
-        if(gameRunning && numberOfPackages <= 0)
-        {
-            EventManager.gameWon();
         }
     }
 

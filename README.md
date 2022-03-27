@@ -17,6 +17,9 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 * Powerups can:
   - Increase your speed.
   - Decrease your speed.
+  - Add more time.
+  - Add more packages.
+  - Remove packages.
 
 ---
 
@@ -36,12 +39,12 @@ Simple prototype developed (and changed to include rules, a game mechanic and re
 |onCarCrash|carCrash()|Event just called if there wasn't a previous crash less than 0.5 seconds before|
 |onGameOver|gameOver()|Game over should just run in case of defeat|
 |onGameWon|gameWon()||
-|onPackageDelivered|packageDelivered()||
+|onPackageDelivered|packageDelivered()|Package removed by powerup also triggers this option|
 |onStartNewGame|startNewGame()||
 
 * **UIManager** controls visibility of all panes, texts (using TMP), and also the generation/destruction of prefabs (packages and powerups). Packages and powerups are generated randomly. Powerups include:
 
-|PowerUp Colour|Description
+|PowerUp Colour|Description|
 |--|--|
 |Blue|Reduces the car speed|
 |Green|Adds 10 more seconds to the game|

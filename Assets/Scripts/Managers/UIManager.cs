@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
 
             while(quantity > 0)
             {
-                int index = UnityEngine.Random.Range(0, indexList.Count - 1);
+                int index = UnityEngine.Random.Range(0, indexList.Count);
                 GameObject element = prefabList[indexList[index]];
                 Instantiate(element);
                 indexList.RemoveAt(index);
@@ -87,18 +87,18 @@ public class UIManager : MonoBehaviour
 
     public void RemoveRandomPackages(int quantity)
     {
-        if(quantity > 0)
+        while(quantity > 0)
         {
             GameObject[] packages = GameObject.FindGameObjectsWithTag("Package");
-
-            while(quantity > 0)
+            if(packages.Length > 0)
             {
-                int index = UnityEngine.Random.Range(0, packages.Length - 1);
+                int index = UnityEngine.Random.Range(0, packages.Length);
                 GameObject element = packages[index];
                 Destroy(element.gameObject, 0.01f);
-
-                quantity--;
+                EventManager.packageDelivered();
             }
+
+            quantity--;
         }
     }
 
@@ -146,7 +146,6 @@ public class UIManager : MonoBehaviour
     {
         DestroyAllObjectsPerTag("Package");
         DestroyAllObjectsPerTag("PowerUp");
-//        DestroyAllObjectsPerTag("RuntimePrefab", 0.1f);
     }
 
     void OnGameOver()
