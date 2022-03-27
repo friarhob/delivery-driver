@@ -16,6 +16,7 @@ public class ActivatePowerUp : MonoBehaviour
 
             car.MultiplySpeed(speedMultiplier);
             GameManager.Instance.AddTime(timeAdded);
+            GameManager.Instance.AddPackages(packagesAdded);
             
             Destroy(this.gameObject, 0.01f);
         }

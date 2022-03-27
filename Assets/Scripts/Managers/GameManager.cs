@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,25 @@ public class GameManager : MonoBehaviour
         EventManager.onGameOver += this.OnGameOver;
         EventManager.onGameWon += this.OnGameOver;
         EventManager.onStartNewGame += this.NewGame;
+    }
+
+    public void AddPackages(int packagesAdded)
+    {
+        if(packagesAdded < 0)
+        {
+            UIManager.Instance.RemoveRandomPackages(-packagesAdded);
+        }
+        else
+        {
+            UIManager.Instance.AddRandomPackages(packagesAdded);
+        }
+
+        numberOfPackages += packagesAdded;
+        if(numberOfPackages <= 0)
+        {
+            numberOfPackages = 0;
+            EventManager.gameWon();
+        }
     }
 
     void OnDestroy() {

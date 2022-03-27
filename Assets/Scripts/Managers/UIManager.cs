@@ -6,6 +6,8 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [SerializeField] public TextMeshProUGUI livesText;
     [SerializeField] public TextMeshProUGUI packagesText;
     [SerializeField] public TextMeshProUGUI timerText;
@@ -20,12 +22,84 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject[] powerupsPrefabs;
 
     private int initialPackagesQuantity = 3;
+    private int initialPowerupsQuantity = 2;
+
+    void Awake()
+    {
+        Instance = Instance ? Instance : this;
+    }
 
     void Start()
     {
         EventManager.onGameOver += this.OnGameOver;
         EventManager.onStartNewGame += this.OnStartNewGame;
         EventManager.onGameWon += this.OnGameWon;
+    }
+
+    void AddRandomPrefabs(GameObject[] prefabList, string tag, int quantity)
+    {
+        if(quantity > 0)
+        {
+            GameObject[] prefabs = GameObject.FindGameObjectsWithTag(tag);
+
+            List<int> indexList = new List<int>();
+
+            // List just the packages that aren't already in the list
+            for(int i = 0; i < prefabList.Length; i++)
+            {
+                bool found = false;
+
+                if(prefabs.Length > 0) //Jump this step if resetting table
+                {
+                    foreach(GameObject currentPrefab in prefabs)
+                    {
+                        found = found || (prefabList[i].transform.position == currentPrefab.transform.position);
+                    }
+                    
+                    if(found)
+                    {
+                        continue;
+                    }
+                }                
+
+                indexList.Add(i);
+            }
+
+            while(quantity > 0)
+            {
+                int index = UnityEngine.Random.Range(0, indexList.Count - 1);
+                GameObject element = prefabList[indexList[index]];
+                Instantiate(element);
+                indexList.RemoveAt(index);
+
+                quantity--;
+            }
+        }
+    }
+
+    public void AddRandomPackages(int packagesAdded)
+    {
+        if(packagesAdded > 0)
+        {
+            AddRandomPrefabs(packagesPrefabs, "Package", packagesAdded);
+        }
+    }
+
+    public void RemoveRandomPackages(int quantity)
+    {
+        if(quantity > 0)
+        {
+            GameObject[] packages = GameObject.FindGameObjectsWithTag("Package");
+
+            while(quantity > 0)
+            {
+                int index = UnityEngine.Random.Range(0, packages.Length - 1);
+                GameObject element = packages[index];
+                Destroy(element.gameObject, 0.01f);
+
+                quantity--;
+            }
+        }
     }
 
     void Update()
@@ -54,25 +128,9 @@ public class UIManager : MonoBehaviour
     {
         CloseAllPanels();
 
-        RegeneratePackages();
-        Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-    }
-
-    private void RegeneratePackages()
-    {
-        List<int> indexList = new List<int>();
-
-        for(int i = 0; i < packagesPrefabs.Length; i++)
-        {
-            indexList.Add(i);
-        }
-
-        for(int i = 0; i < initialPackagesQuantity; i++)
-        {
-            int index = UnityEngine.Random.Range(0, indexList.Count - 1);
-            GameObject element = packagesPrefabs[indexList[index]];
-            Instantiate(element);
-        }
+        AddRandomPrefabs(packagesPrefabs, "Package", initialPackagesQuantity);
+        AddRandomPrefabs(powerupsPrefabs, "PowerUp", initialPowerupsQuantity);
+        //Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     private void DestroyAllObjectsPerTag(string tag, float delay = 0.01f)
@@ -87,7 +145,8 @@ public class UIManager : MonoBehaviour
     void RemovePrefabs()
     {
         DestroyAllObjectsPerTag("Package");
-        DestroyAllObjectsPerTag("RuntimePrefab", 0.1f);
+        DestroyAllObjectsPerTag("PowerUp");
+//        DestroyAllObjectsPerTag("RuntimePrefab", 0.1f);
     }
 
     void OnGameOver()
