@@ -19,8 +19,12 @@ public class EventManager : MonoBehaviour
     public delegate void NewGame();
     public static event NewGame onStartNewGame;
 
-    public delegate void WonGame();
-    public static event WonGame onGameWon;
+    public delegate void FinishLevel();
+    public static event FinishLevel onFinishLevel;
+
+    public delegate void StartNewLevel();
+    public static event StartNewLevel onStartNewLevel;
+
 
     void Awake()
     {
@@ -59,8 +63,13 @@ public class EventManager : MonoBehaviour
         onStartNewGame?.Invoke();
     }
 
-    public static void gameWon()
+    public static void finishLevel()
     {
-        onGameWon?.Invoke();
+        onFinishLevel?.Invoke();
+    }
+
+    public static void startNewLevel()
+    {
+        onStartNewLevel?.Invoke();
     }
 }

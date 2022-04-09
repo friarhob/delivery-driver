@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static int numberOfPackages { get; private set; }
-    public static int numberOfLives { get; private set; }
-    public static float remainingTime { get; private set; }
+    public int numberOfPackages { get; private set; }
+    public int numberOfLives { get; private set; }
+    public float remainingTime { get; private set; }
 
-    public static bool gameRunning { get; private set; }
+    public bool gameRunning { get; private set; }
+    public int level { get; private set; }
 
     void Awake() {
         Instance = Instance ? Instance : this;
@@ -21,11 +22,25 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-//        EventManager.onPackageDelivered += this.OnPackageDelivered;
-        EventManager.onCarCrash += this.OnCarCrash;
-        EventManager.onGameOver += this.OnGameOver;
-        EventManager.onGameWon += this.OnGameOver;
+        EventManager.onCarCrash += this.CarCrash;
+        EventManager.onGameOver += this.GameOver;
+        EventManager.onFinishLevel += this.FinishLevel;
+        EventManager.onStartNewLevel += this.StartNextLevel;
         EventManager.onStartNewGame += this.NewGame;
+
+        gameRunning = false;
+    }
+
+    private void FinishLevel()
+    {
+        level++;
+        gameRunning = false;
+    }
+
+    void StartNextLevel()
+    {
+        gameRunning = true;
+        remainingTime = 60f;
     }
 
     public void AddPackages(int packagesAdded)
@@ -43,9 +58,9 @@ public class GameManager : MonoBehaviour
 
 
     void OnDestroy() {
-        EventManager.onCarCrash -= this.OnCarCrash;
-        EventManager.onGameOver -= this.OnGameOver;
-        EventManager.onGameWon -= this.OnGameOver;
+        EventManager.onCarCrash -= this.CarCrash;
+        EventManager.onGameOver -= this.GameOver;
+        EventManager.onFinishLevel -= this.StartNextLevel;
         EventManager.onStartNewGame -= this.NewGame;
     }
 
@@ -63,7 +78,7 @@ public class GameManager : MonoBehaviour
             numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length + (carCarrying ? 1 : 0);
             if(numberOfPackages == 0)
             {
-                EventManager.gameWon();
+                EventManager.finishLevel();
             }
             
         }
@@ -72,8 +87,7 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         numberOfLives = 5;
-        gameRunning = true;
-        remainingTime = 60f;
+        StartNextLevel();
     }
 
     public void AddTime(float amount)
@@ -84,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnCarCrash()
+    void CarCrash()
     {
         numberOfLives--;
         if(numberOfLives <= 0)
@@ -93,8 +107,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnGameOver()
+    void GameOver()
     {
+        level=1;
         gameRunning = false;
     }
 

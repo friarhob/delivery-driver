@@ -15,10 +15,12 @@ public class CarDelivery : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         hasPackage = false;
 
+        EventManager.onStartNewLevel += ResetCarState;
         EventManager.onStartNewGame += ResetCarState;
     }
 
     void OnDestroy() {
+        EventManager.onStartNewLevel -= ResetCarState;
         EventManager.onStartNewGame -= ResetCarState;
     }
 

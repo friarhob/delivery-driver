@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI timerText;
     
     [SerializeField] public GameObject gameOverPanel;
-    [SerializeField] public GameObject gameWonPanel;
+    [SerializeField] public GameObject levelWonPanel;
     [SerializeField] public GameObject instructionsPanel;
 
     [SerializeField] public GameObject powerupsPrefab;
@@ -32,8 +32,9 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         EventManager.onGameOver += this.OnGameOver;
-        EventManager.onStartNewGame += this.OnStartNewGame;
-        EventManager.onGameWon += this.OnGameWon;
+        EventManager.onStartNewGame += this.OnStartNewLevel;
+        EventManager.onFinishLevel += this.OnFinishLevel;
+        EventManager.onStartNewLevel += this.OnStartNewLevel;
     }
 
     void AddRandomPrefabs(GameObject[] prefabList, string tag, int quantity)
@@ -104,7 +105,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.gameRunning)
+        if(GameManager.Instance.gameRunning)
         {
             UpdateTextFields();
         }
@@ -112,25 +113,24 @@ public class UIManager : MonoBehaviour
 
     void UpdateTextFields()
     {
-        livesText.text = "Lives: "+GameManager.numberOfLives;
-        packagesText.text = "Packages: "+GameManager.numberOfPackages;
-        timerText.text = ""+Mathf.CeilToInt(GameManager.remainingTime);
+        livesText.text = "Lives: "+GameManager.Instance.numberOfLives;
+        packagesText.text = "Packages: "+GameManager.Instance.numberOfPackages;
+        timerText.text = ""+Mathf.CeilToInt(GameManager.Instance.remainingTime);
     }
 
     void OnDestroy()
     {
         EventManager.onGameOver -= this.OnGameOver;
-        EventManager.onStartNewGame -= this.OnStartNewGame;
-        EventManager.onGameWon -= this.OnGameWon;
+        EventManager.onStartNewGame -= this.OnStartNewLevel;
+        EventManager.onFinishLevel -= this.OnFinishLevel;
     }
 
-    void OnStartNewGame()
+    void OnStartNewLevel()
     {
         CloseAllPanels();
 
         AddRandomPrefabs(packagesPrefabs, "Package", initialPackagesQuantity);
         AddRandomPrefabs(powerupsPrefabs, "PowerUp", initialPowerupsQuantity);
-        //Instantiate(powerupsPrefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     private void DestroyAllObjectsPerTag(string tag, float delay = 0.01f)
@@ -155,16 +155,16 @@ public class UIManager : MonoBehaviour
 
         RemovePrefabs();
     }
-    void OnGameWon()
+    void OnFinishLevel()
     {
         UpdateTextFields();
-        gameWonPanel.SetActive(true);
+        levelWonPanel.SetActive(true);
     }
 
     void CloseAllPanels()
     {
         gameOverPanel.SetActive(false);
-        gameWonPanel.SetActive(false);
+        levelWonPanel.SetActive(false);
         instructionsPanel.SetActive(false);
     }
 

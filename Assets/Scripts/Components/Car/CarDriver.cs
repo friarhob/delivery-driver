@@ -16,11 +16,12 @@ public class CarDriver : MonoBehaviour
         ResetCarInfo();
 
         EventManager.onStartNewGame += ResetCarInfo;
+        EventManager.onStartNewLevel += ResetCarPosition;
     }
 
     void Update()
     {
-        if(GameManager.gameRunning)
+        if(GameManager.Instance.gameRunning)
         {
             float steerAmount = Input.GetAxis("Horizontal")*Time.deltaTime;
             float moveAmount = Input.GetAxis("Vertical")*Time.deltaTime;
@@ -32,12 +33,18 @@ public class CarDriver : MonoBehaviour
 
     void OnDestroy() {
         EventManager.onStartNewGame -= ResetCarInfo;
+        EventManager.onStartNewLevel -= ResetCarPosition;
+    }
+
+    void ResetCarPosition()
+    {
+        transform.position = new Vector3(0f, 0f, 0f);
+        transform.rotation = Quaternion.identity;
     }
 
     void ResetCarInfo()
     {
-        transform.position = new Vector3(0f, 0f, 0f);
-        transform.rotation = Quaternion.identity;
+        ResetCarPosition();
 
         steerSpeed = steerBaseSpeed;
         moveSpeed = moveBaseSpeed;
