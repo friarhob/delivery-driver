@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
     int pointsPerPackage = 100;
 
-    void Awake() {
+    void Awake()
+    {
         Instance = Instance ? Instance : this;
     }
 
@@ -38,25 +39,26 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(gameRunning)
+        if (gameRunning)
         {
             remainingTime -= Time.deltaTime;
-            if(remainingTime <= 0)
+            if (remainingTime <= 0)
             {
                 EventManager.Instance.gameOver();
             }
 
             bool carCarrying = GameObject.FindGameObjectWithTag("Car").GetComponent<CarDelivery>().hasPackage;
             numberOfPackages = GameObject.FindGameObjectsWithTag("Package").Length + (carCarrying ? 1 : 0);
-            if(numberOfPackages == 0)
+            if (numberOfPackages == 0)
             {
                 EventManager.Instance.finishLevel();
             }
-            
+
         }
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         EventManager.onCarCrash -= this.CarCrash;
         EventManager.onGameOver -= this.GameOver;
         EventManager.onFinishLevel -= this.FinishLevel;
@@ -84,11 +86,11 @@ public class GameManager : MonoBehaviour
 
     public void AddPackages(int packagesAdded)
     {
-        if(packagesAdded < 0)
+        if (packagesAdded < 0)
         {
             UIManager.Instance.RemoveRandomPackages(-packagesAdded);
         }
-        else if(packagesAdded > 0)
+        else if (packagesAdded > 0)
         {
             UIManager.Instance.AddRandomPackages(packagesAdded);
         }
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public void AddTime(float amount)
     {
-        if(gameRunning)
+        if (gameRunning)
         {
             remainingTime += amount;
         }
@@ -113,7 +115,7 @@ public class GameManager : MonoBehaviour
     void CarCrash()
     {
         numberOfLives--;
-        if(numberOfLives <= 0)
+        if (numberOfLives <= 0)
         {
             EventManager.Instance.gameOver();
         }
@@ -121,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        level=1;
+        level = 1;
         gameRunning = false;
     }
 

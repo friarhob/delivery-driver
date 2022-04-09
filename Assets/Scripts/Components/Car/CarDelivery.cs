@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CarDelivery : MonoBehaviour
 {
-    [SerializeField] Color32 hasPackageColour = new Color32(1,1,1,1);
-    [SerializeField] Color32 noPackageColour = new Color32(1,1,1,1);
+    [SerializeField] Color32 hasPackageColour = new Color32(1, 1, 1, 1);
+    [SerializeField] Color32 noPackageColour = new Color32(1, 1, 1, 1);
     [SerializeField] float delayUntilDestroyPackage = 1.0f;
-    public bool hasPackage {get; private set;}
+    public bool hasPackage { get; private set; }
     SpriteRenderer spriteRenderer;
 
     void Start()
@@ -19,7 +19,8 @@ public class CarDelivery : MonoBehaviour
         EventManager.onStartNewGame += ResetCarState;
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         EventManager.onStartNewLevel -= ResetCarState;
         EventManager.onStartNewGame -= ResetCarState;
     }
@@ -32,14 +33,14 @@ public class CarDelivery : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Package" && !hasPackage)
+        if (other.tag == "Package" && !hasPackage)
         {
             hasPackage = true;
             spriteRenderer.color = hasPackageColour;
 
             Destroy(other.gameObject, delayUntilDestroyPackage);
         }
-        if(other.tag == "Customer" && hasPackage)
+        if (other.tag == "Customer" && hasPackage)
         {
             ResetCarState();
 

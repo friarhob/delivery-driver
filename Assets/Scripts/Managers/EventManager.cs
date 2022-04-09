@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager Instance {get; private set;}
+    public static EventManager Instance { get; private set; }
 
     public delegate void CarCrash();
     public static event CarCrash onCarCrash;
@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour
 
     void Start()
     {
-        lastCarCrash = System.DateTime.Now;    
+        lastCarCrash = System.DateTime.Now;
     }
 
     public void carCrash()
@@ -41,10 +41,10 @@ public class EventManager : MonoBehaviour
         // Make sure multiple crashes don't occur too close to each other
         System.DateTime now = System.DateTime.Now;
         System.TimeSpan timeSpan = now - lastCarCrash;
-        
+
         lastCarCrash = System.DateTime.Now;
 
-        if(timeSpan.TotalSeconds > 0.5)
+        if (timeSpan.TotalSeconds > 0.5)
             onCarCrash?.Invoke();
     }
 

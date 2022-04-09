@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI packagesText;
     [SerializeField] public TextMeshProUGUI timerText;
     [SerializeField] public TextMeshProUGUI scoreText;
-    
+
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject levelWonPanel;
     [SerializeField] public GameObject instructionsPanel;
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.gameRunning)
+        if (GameManager.Instance.gameRunning)
         {
             UpdateTextFields();
         }
@@ -53,34 +53,34 @@ public class UIManager : MonoBehaviour
 
     void AddRandomPrefabs(GameObject[] prefabList, string tag, int quantity)
     {
-        if(quantity > 0)
+        if (quantity > 0)
         {
             GameObject[] prefabs = GameObject.FindGameObjectsWithTag(tag);
 
             List<int> indexList = new List<int>();
 
             // List just the packages that aren't already in the list
-            for(int i = 0; i < prefabList.Length; i++)
+            for (int i = 0; i < prefabList.Length; i++)
             {
                 bool found = false;
 
-                if(prefabs.Length > 0) //Jump this step if resetting table
+                if (prefabs.Length > 0) //Jump this step if resetting table
                 {
-                    foreach(GameObject currentPrefab in prefabs)
+                    foreach (GameObject currentPrefab in prefabs)
                     {
                         found = found || (prefabList[i].transform.position == currentPrefab.transform.position);
                     }
-                    
-                    if(found)
+
+                    if (found)
                     {
                         continue;
                     }
-                }                
+                }
 
                 indexList.Add(i);
             }
 
-            while(indexList.Count > 0 && quantity > 0)
+            while (indexList.Count > 0 && quantity > 0)
             {
                 int index = UnityEngine.Random.Range(0, indexList.Count);
                 GameObject element = prefabList[indexList[index]];
@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
 
     public void AddRandomPackages(int packagesAdded)
     {
-        if(packagesAdded > 0)
+        if (packagesAdded > 0)
         {
             AddRandomPrefabs(packagesPrefabs, "Package", packagesAdded);
         }
@@ -102,10 +102,11 @@ public class UIManager : MonoBehaviour
 
     public void RemoveRandomPackages(int quantity)
     {
-        while(quantity > 0)
+        while (quantity > 0)
         {
             GameObject[] packages = GameObject.FindGameObjectsWithTag("Package");
-            if(packages.Length > 0)
+
+            if (packages.Length > 0)
             {
                 int index = UnityEngine.Random.Range(0, packages.Length);
                 GameObject element = packages[index];
@@ -119,17 +120,16 @@ public class UIManager : MonoBehaviour
 
     void UpdateTextFields()
     {
-        livesText.text = "Lives: "+GameManager.Instance.numberOfLives;
-        packagesText.text = "Packages: "+GameManager.Instance.numberOfPackages;
-        timerText.text = ""+Mathf.CeilToInt(GameManager.Instance.remainingTime);
-        scoreText.text = "Score: "+GameManager.Instance.score;
+        livesText.text = "Lives: " + GameManager.Instance.numberOfLives;
+        packagesText.text = "Packages: " + GameManager.Instance.numberOfPackages;
+        timerText.text = "" + Mathf.CeilToInt(GameManager.Instance.remainingTime);
+        scoreText.text = "Score: " + GameManager.Instance.score;
     }
-
 
     void OnStartNewLevel()
     {
         int initialPackagesQuantity = GameManager.Instance.level;
-        int initialPowerupsQuantity = Math.Max(1, GameManager.Instance.level/2);
+        int initialPowerupsQuantity = Math.Max(1, GameManager.Instance.level / 2);
 
         CloseAllPanels();
 
@@ -137,10 +137,10 @@ public class UIManager : MonoBehaviour
         AddRandomPrefabs(powerupsPrefabs, "PowerUp", initialPowerupsQuantity);
     }
 
-    private void DestroyAllObjectsPerTag(string tag, float delay = 0.01f)
+    void DestroyAllObjectsPerTag(string tag, float delay = 0.01f)
     {
         GameObject[] elements = GameObject.FindGameObjectsWithTag(tag);
-        foreach(GameObject element in elements)
+        foreach (GameObject element in elements)
         {
             Destroy(element, delay);
         }

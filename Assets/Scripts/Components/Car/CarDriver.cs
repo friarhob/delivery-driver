@@ -21,17 +21,18 @@ public class CarDriver : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.gameRunning)
+        if (GameManager.Instance.gameRunning)
         {
-            float steerAmount = Input.GetAxis("Horizontal")*Time.deltaTime;
-            float moveAmount = Input.GetAxis("Vertical")*Time.deltaTime;
+            float steerAmount = Input.GetAxis("Horizontal") * Time.deltaTime;
+            float moveAmount = Input.GetAxis("Vertical") * Time.deltaTime;
 
-            transform.Rotate(0, 0, -steerAmount*steerSpeed);
-            transform.Translate(0, moveAmount*moveSpeed, 0);
+            transform.Rotate(0, 0, -steerAmount * steerSpeed);
+            transform.Translate(0, moveAmount * moveSpeed, 0);
         }
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         EventManager.onStartNewGame -= ResetCarInfo;
         EventManager.onStartNewLevel -= ResetCarPosition;
     }
