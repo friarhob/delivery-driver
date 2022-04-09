@@ -36,7 +36,7 @@ public class EventManager : MonoBehaviour
         lastCarCrash = System.DateTime.Now;    
     }
 
-    public static void carCrash()
+    public void carCrash()
     {
         // Make sure multiple crashes don't occur too close to each other
         System.DateTime now = System.DateTime.Now;
@@ -48,27 +48,27 @@ public class EventManager : MonoBehaviour
             onCarCrash?.Invoke();
     }
 
-    public static void packageDelivered()
+    public void packageDelivered()
     {
         onPackageDelivered?.Invoke();
     }
 
-    public static void gameOver()
+    public void gameOver()
     {
         onGameOver?.Invoke();
     }
 
-    public static void startNewGame()
+    public void startNewGame()
     {
         onStartNewGame?.Invoke();
     }
 
-    public static void finishLevel()
+    public void finishLevel()
     {
         onFinishLevel?.Invoke();
     }
 
-    public static void startNewLevel()
+    public void startNewLevel()
     {
         onStartNewLevel?.Invoke();
     }

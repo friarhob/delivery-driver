@@ -52,7 +52,7 @@ public class CarDriver : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        EventManager.carCrash();
+        EventManager.Instance.carCrash();
     }
 
     public void MultiplySpeed(float factor)

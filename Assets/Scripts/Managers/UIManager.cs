@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI livesText;
     [SerializeField] public TextMeshProUGUI packagesText;
     [SerializeField] public TextMeshProUGUI timerText;
+    [SerializeField] public TextMeshProUGUI scoreText;
     
     [SerializeField] public GameObject gameOverPanel;
     [SerializeField] public GameObject levelWonPanel;
@@ -32,6 +33,22 @@ public class UIManager : MonoBehaviour
         EventManager.onStartNewGame += this.OnStartNewLevel;
         EventManager.onFinishLevel += this.OnFinishLevel;
         EventManager.onStartNewLevel += this.OnStartNewLevel;
+    }
+
+    void Update()
+    {
+        if(GameManager.Instance.gameRunning)
+        {
+            UpdateTextFields();
+        }
+    }
+
+    void OnDestroy()
+    {
+        EventManager.onGameOver -= this.OnGameOver;
+        EventManager.onStartNewGame -= this.OnStartNewLevel;
+        EventManager.onFinishLevel -= this.OnFinishLevel;
+        EventManager.onStartNewLevel -= this.OnStartNewLevel;
     }
 
     void AddRandomPrefabs(GameObject[] prefabList, string tag, int quantity)
@@ -93,18 +110,10 @@ public class UIManager : MonoBehaviour
                 int index = UnityEngine.Random.Range(0, packages.Length);
                 GameObject element = packages[index];
                 Destroy(element.gameObject, 0.01f);
-                EventManager.packageDelivered();
+                EventManager.Instance.packageDelivered();
             }
 
             quantity--;
-        }
-    }
-
-    void Update()
-    {
-        if(GameManager.Instance.gameRunning)
-        {
-            UpdateTextFields();
         }
     }
 
@@ -113,14 +122,9 @@ public class UIManager : MonoBehaviour
         livesText.text = "Lives: "+GameManager.Instance.numberOfLives;
         packagesText.text = "Packages: "+GameManager.Instance.numberOfPackages;
         timerText.text = ""+Mathf.CeilToInt(GameManager.Instance.remainingTime);
+        scoreText.text = "Score: "+GameManager.Instance.score;
     }
 
-    void OnDestroy()
-    {
-        EventManager.onGameOver -= this.OnGameOver;
-        EventManager.onStartNewGame -= this.OnStartNewLevel;
-        EventManager.onFinishLevel -= this.OnFinishLevel;
-    }
 
     void OnStartNewLevel()
     {

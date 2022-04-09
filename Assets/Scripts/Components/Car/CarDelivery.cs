@@ -43,7 +43,7 @@ public class CarDelivery : MonoBehaviour
         {
             ResetCarState();
 
-            EventManager.packageDelivered();
+            EventManager.Instance.packageDelivered();
         }
     }
 }
