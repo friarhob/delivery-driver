@@ -21,9 +21,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject[] packagesPrefabs;
     [SerializeField] public GameObject[] powerupsPrefabs;
 
-    private int initialPackagesQuantity = 3;
-    private int initialPowerupsQuantity = 2;
-
     void Awake()
     {
         Instance = Instance ? Instance : this;
@@ -66,7 +63,7 @@ public class UIManager : MonoBehaviour
                 indexList.Add(i);
             }
 
-            while(quantity > 0)
+            while(indexList.Count > 0 && quantity > 0)
             {
                 int index = UnityEngine.Random.Range(0, indexList.Count);
                 GameObject element = prefabList[indexList[index]];
@@ -127,6 +124,9 @@ public class UIManager : MonoBehaviour
 
     void OnStartNewLevel()
     {
+        int initialPackagesQuantity = GameManager.Instance.level;
+        int initialPowerupsQuantity = Math.Max(1, GameManager.Instance.level/2);
+
         CloseAllPanels();
 
         AddRandomPrefabs(packagesPrefabs, "Package", initialPackagesQuantity);

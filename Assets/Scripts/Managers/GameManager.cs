@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         EventManager.onFinishLevel += this.FinishLevel;
         EventManager.onStartNewLevel += this.StartNextLevel;
         EventManager.onStartNewGame += this.NewGame;
-
+        level = 1;
         gameRunning = false;
     }
 
