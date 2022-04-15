@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
     void OnStartNewLevel()
     {
         int initialPackagesQuantity = GameManager.Instance.level;
-        int initialPowerupsQuantity = Math.Max(1, GameManager.Instance.level / 2);
+        int initialPowerupsQuantity = Mathf.CeilToInt(GameManager.Instance.level / 2.0f);
 
         CloseAllPanels();
 
